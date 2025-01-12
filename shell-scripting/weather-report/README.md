@@ -15,4 +15,4 @@ For each day, gather actual data and forecasted data for noon on the following d
     - redirect output and append it to rx_poc.log
 3. crontab -e
     - add to crontab such that rx_poc.sh is launched every noon (in Casablanca time)
-4.
+4. create fc_accuracy.sh for calculating accuaracy and adding to .tsv file
