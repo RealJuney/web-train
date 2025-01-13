@@ -48,14 +48,14 @@ echo "backupFileName: $backupFileName"
 
 # [TASK 5]
 origAbsPath=$(pwd)
-echo $origAbsPath
 
 # [TASK 6]
-cd # <-
-destDirAbsPath="$origAbsPath/$destinationDirectory"
+cd $destinationDirectory
+destDirAbsPath=$(pwd)
 
 # [TASK 7]
-cd "$origAbsPath/$targetDirectory" # <-
+cd $origAbsPath
+cd $targetDirectory
 
 
 # [TASK 8]
@@ -63,14 +63,20 @@ yesterdayTS=$(($currentTS - 24 * 60 * 60))
 
 declare -a toBackup
 
-echo $(ls)
+
 for file in $(ls) # [TASK 9]
 do
-  echo "hi $file"
+  mod_date=$(date -r $file +%s)
+  if [[ $mod_date > $yesterdayTS ]]
+  then
+    toBackup+=($file)
+  fi
 done
 
 # [TASK 12]
+tar -czvf $backupFileName ${toBackup[@]}
 
 # [TASK 13]
+mv $backupFileName $destDirAbsPath
 
 # Congratulations! You completed the final project for this course!
